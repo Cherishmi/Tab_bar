@@ -6,49 +6,44 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.tabbar.databinding.ActivityMainBinding
 import com.example.tabbar.fragments.adapter.ViewPageAdapter
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mActivityMainBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
 
-       setUpTabs()
+        val tabLayout= findViewById<TabLayout>(R.id.tabLayout)
+        val viewPager2=findViewById<ViewPager2>(R.id.viewPager)
 
-    }
+        val adapter=ViewPageAdapter(supportFragmentManager,lifecycle)
 
-   private fun setUpTabs(){
-       val adapter = ViewPageAdapter( this, mActivityMainBinding.tabLayout.tabCount)
-        mActivityMainBinding.viewPager.adapter = adapter
+        viewPager2.adapter=adapter
 
-        mActivityMainBinding.viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
-            override fun onPageSelected(position: Int){
-                mActivityMainBinding.tabLayout.selectTab(mActivityMainBinding.tabLayout.getTabAt(position))
+        TabLayoutMediator(tabLayout,viewPager2){tab, position->
+            when (position){
+                0->{
+                    tab.text="First"
+                }
+                1->{
+                    tab.text="second"
+                }
+                2->{
+                    tab.text="third"
+                }
             }
-        })
-
-       mActivityMainBinding.tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener
-       {
-           override fun onTabSelected(tab: TabLayout.Tab)
-           {
-               mActivityMainBinding.viewPager.currentItem = tab.position
-           }
-
-           override fun onTabUnselected(tab: TabLayout.Tab?) {
-               TODO("Not yet implemented")
-           }
-
-           override fun onTabReselected(tab: TabLayout.Tab?) {
-               TODO("Not yet implemented")
-           }
+        }
 
 
-       })
 
     }
+
+
+
+
 
 
 
