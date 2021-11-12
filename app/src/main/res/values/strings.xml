@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Halmart</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Home">Home</string>
+    <string name="Fav">Favourites</string>
+    <string name="Settings">Settings</string>
+..</resources>
